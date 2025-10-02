@@ -3,7 +3,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 8f;
-    public string inputAxis; // "Vertical1" o "Vertical2"
+
+    // Definimos las teclas de este jugador
+    public KeyCode upKey;
+    public KeyCode downKey;
+
     private Rigidbody2D rb;
 
     void Start()
@@ -13,7 +17,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float move = Input.GetAxisRaw(inputAxis);
+        float move = 0f;
+
+        if (Input.GetKey(upKey))
+            move = 1f;
+        else if (Input.GetKey(downKey))
+            move = -1f;
+
         rb.velocity = new Vector2(0, move * speed);
     }
 }
